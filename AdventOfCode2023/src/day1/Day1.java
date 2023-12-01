@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 
 public class Day1 {
 
@@ -18,7 +17,6 @@ public class Day1 {
 		int answer = 0;
 		while ((line = br.readLine()) != null) {
 			int lineValue = Integer.parseInt(findFirstInt(line) + "" + findLastInt(line));
-			System.out.println("line: " + line + " ---- value: " + lineValue);
 			answer += lineValue;
 		}
 		System.out.println("Total:" + answer);
@@ -90,23 +88,18 @@ public class Day1 {
 
 		char spelledVal = line.charAt(lastDigitIndex);
 		int indexOfSpelledVal = lastDigitIndex;
-		System.out.println("found :" + spelledVal + " at: " + indexOfSpelledVal);
 		
-		System.out.println("last index of one " + line.lastIndexOf("one"));
 		if(line.lastIndexOf("one") > lastDigitIndex) {
 			spelledVal = '1';
 			indexOfSpelledVal = line.lastIndexOf("one");
-			System.out.println("found one at:" + indexOfSpelledVal);
 		}
 		if(line.lastIndexOf("two") > indexOfSpelledVal) {
 			spelledVal = '2';
 			indexOfSpelledVal = line.lastIndexOf("two");
-			System.out.println("found two at:" + indexOfSpelledVal);
 		}
 		if(line.lastIndexOf("three") > indexOfSpelledVal) {
 			spelledVal = '3';
 			indexOfSpelledVal = line.lastIndexOf("three");
-			System.out.println("found three at:" + indexOfSpelledVal);
 		}
 		if(line.lastIndexOf("four") > indexOfSpelledVal) {
 			spelledVal = '4';
@@ -124,7 +117,6 @@ public class Day1 {
 		if(line.lastIndexOf("seven") > indexOfSpelledVal) {
 			spelledVal = '7';
 			indexOfSpelledVal = line.lastIndexOf("seven");
-			System.out.println("found seven at:" + indexOfSpelledVal);
 		}
 		if(line.lastIndexOf("eight") > indexOfSpelledVal) {
 			spelledVal = '8';
