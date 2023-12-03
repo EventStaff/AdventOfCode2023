@@ -80,105 +80,39 @@ public class Day3 {
 		for (int i = 0; i < schematic.length; i++) {
 			for (int j = 0; j < schematic[i].length; j++) {
 				if (schematic[i][j] == '*') {
-					boolean w = Character.isDigit(schematic[i][j - 1]);
-					boolean nw = Character.isDigit(schematic[i - 1][j - 1]);
-					boolean n = Character.isDigit(schematic[i - 1][j]);
-					boolean ne = Character.isDigit(schematic[i - 1][j + 1]);
-					boolean e = Character.isDigit(schematic[i][j + 1]);
-					boolean se = Character.isDigit(schematic[i + 1][j + 1]);
-					boolean s = Character.isDigit(schematic[i + 1][j]);
-					boolean sw = Character.isDigit(schematic[i + 1][j - 1]);
-
-					int count = 0;
-					if (w)
-						count++;
-					if (e)
-						count++;
-					if (n) {
-						count++;
-					} else {
-						if (ne)
-							count++;
-						if (nw)
-							count++;
+					Vector<Integer> nums = new Vector<Integer>();
+					if (Character.isDigit(schematic[i][j - 1])) {
+						nums.add(Integer.valueOf(findNum(schematic, i, j - 1)));
 					}
-					if (s) {
-						count++;
+					if (Character.isDigit(schematic[i - 1][j])) {
+						nums.add(Integer.valueOf(findNum(schematic, i - 1, j)));
 					} else {
-						if (sw)
-							count++;
-						if (se)
-							count++;
+						if (Character.isDigit(schematic[i - 1][j - 1])) {
+							nums.add(Integer.valueOf(findNum(schematic, i - 1, j - 1)));
+						}
+						if (Character.isDigit(schematic[i - 1][j + 1])) {
+							nums.add(Integer.valueOf(findNum(schematic, i - 1, j + 1)));
+						}
+					}
+					if (Character.isDigit(schematic[i][j + 1])) {
+						nums.add(Integer.valueOf(findNum(schematic, i, j + 1)));
 					}
 
-					if (count == 2) {
-						boolean foundOne = false;
-						int one = 0, two = 0;
-						if (w) {
-							one = findNum(schematic, i, j - 1);
-							foundOne = true;
-						}
-						if (n) {
-							if (!foundOne) {
-								foundOne = true;
-								one = findNum(schematic, i - 1, j);
-							} else {
-								two = findNum(schematic, i - 1, j);
-							}
-						} else {
-							if (nw) {
-								if (!foundOne) {
-									foundOne = true;
-									one = findNum(schematic, i - 1, j - 1);
-								} else {
-									two = findNum(schematic, i - 1, j - 1);
-								}
-							}
-							if (ne) {
-								if (!foundOne) {
-									foundOne = true;
-									one = findNum(schematic, i - 1, j + 1);
-								} else {
-									two = findNum(schematic, i - 1, j + 1);
-								}
-							}
-						}
+					if (Character.isDigit(schematic[i + 1][j])) {
+						nums.add(Integer.valueOf(findNum(schematic, i + 1, j)));
 
-						if (e) {
-							if (!foundOne) {
-								foundOne = true;
-								one = findNum(schematic, i, j + 1);
-							} else {
-								two = findNum(schematic, i, j + 1);
-							}
-						}
+					} else {
+						if (Character.isDigit(schematic[i + 1][j + 1])) {
+							nums.add(Integer.valueOf(findNum(schematic, i + 1, j + 1)));
 
-						if (s) {
-							if (!foundOne) {
-								foundOne = true;
-								one = findNum(schematic, i + 1, j);
-							} else {
-								two = findNum(schematic, i + 1, j);
-							}
-						} else {
-							if (sw) {
-								if (!foundOne) {
-									foundOne = true;
-									one = findNum(schematic, i + 1, j - 1);
-								} else {
-									two = findNum(schematic, i + 1, j - 1);
-								}
-							}
-							if (se) {
-								if (!foundOne) {
-									foundOne = true;
-									one = findNum(schematic, i + 1, j + 1);
-								} else {
-									two = findNum(schematic, i + 1, j + 1);
-								}
-							}
 						}
-						answer += one * two;
+						if (Character.isDigit(schematic[i + 1][j - 1])) {
+							nums.add(Integer.valueOf(findNum(schematic, i + 1, j - 1)));
+						}
+					}
+
+					if (nums.size() == 2) {
+						answer += nums.elementAt(0).intValue() * nums.elementAt(1).intValue();
 					}
 				}
 			}
