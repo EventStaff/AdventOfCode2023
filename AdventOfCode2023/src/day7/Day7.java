@@ -212,7 +212,7 @@ class Hand implements Comparable<Hand> {
 				}
 			}
 		}
-		throw new RuntimeException("Unable to compare to Hands for some reason");
+		throw new RuntimeException("Unable to compare two Hands for some reason");
 	}
 
 	private int toNum(char card) {
